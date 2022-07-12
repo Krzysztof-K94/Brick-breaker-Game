@@ -12,8 +12,8 @@ export default class Ball {
             y: 9
         }
 
-        this.images = new Image();
-        this.images.src = './images/ball-1.png';
+        this.image = new Image();
+        this.image.src = './images/ball-1.png';
         this.size = 20;
         this.gameWidth = game.gameWidth;
         this.gameHeight = game.gameHeight;
@@ -29,7 +29,7 @@ export default class Ball {
     }
 
     draw(ctx) {
-        ctx.drawImage(this.images,this.position.x,this.position.y,this.size,this.size)
+            ctx.drawImage(this.image,this.position.x,this.position.y,this.size,this.size)
     }
 
     update(deltaTime) {

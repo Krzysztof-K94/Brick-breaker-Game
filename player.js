@@ -15,7 +15,7 @@ export default class Player {
     };
 
     draw(ctx){
-        ctx.drawImage(this.image, this.position.x, this.position.y, this.width, this.height);
+            ctx.drawImage(this.image, this.position.x, this.position.y, this.width, this.height);      
     }
 
     update(deltaTime) {

@@ -52,24 +52,28 @@ export class Game {
     }
 
     start(){
-        if(this.gameState !== GAMESTATE.MENU && this.gameState !== GAMESTATE.NEXTLEVEL && this.gameState !== GAMESTATE.GAMEOVER) return;
-        this.music.play();
-        //set default value and render on screen 
-        if(this.gameState === GAMESTATE.GAMEOVER || this.gameState === GAMESTATE.MENU) {
-            this.lives = 3;
-            this.score = 0;
-            this.currentLvl = 0;
-            livesEl.innerHTML = this.lives;
+        console.log(this.ball.image)
+        if(this.player.image && this.ball.image) {
+            if(this.gameState !== GAMESTATE.MENU && this.gameState !== GAMESTATE.NEXTLEVEL && this.gameState !== GAMESTATE.GAMEOVER) return;
+            this.music.play();
+            //set default value and render on screen 
+            if(this.gameState === GAMESTATE.GAMEOVER || this.gameState === GAMESTATE.MENU) {
+                this.lives = 3;
+                this.score = 0;
+                this.currentLvl = 0;
+                livesEl.innerHTML = this.lives;
+            }
+    
+            levelEl.innerHTML = this.currentLvl + 1;
+            
+            this.bricks = buildLevel(this, this.levels[this.currentLvl]);
+    
+            this.gameObjects = [this.player, this.ball];
+            this.ball.reset();
+    
+            this.gameState = GAMESTATE.RUNNING;
         }
 
-        levelEl.innerHTML = this.currentLvl + 1;
-        
-        this.bricks = buildLevel(this, this.levels[this.currentLvl]);
-
-        this.gameObjects = [this.player, this.ball];
-        this.ball.reset();
-
-        this.gameState = GAMESTATE.RUNNING;
     }
 
     update(deltaTime) {
@@ -81,7 +85,6 @@ export class Game {
 
         //change level
         if(this.bricks.length === 0) {
-            console.log(this.bricks.length)
             this.gameState = GAMESTATE.NEXTLEVEL;
             this.currentLvl++;
             this.start();
